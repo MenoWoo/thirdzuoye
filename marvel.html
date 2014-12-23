@@ -1,0 +1,845 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="UTF-8">
+	<title>漫威官网</title>
+	<script type="text/javascript">
+	window.onload=function(){
+	  var container=document.getElementById("slip-container");
+      var slipdt=document.getElementById("slip-dt");
+      var aofdt=slipdt.getElementsByTagName("a");
+      var slipdd=document.getElementById("slip-dd");
+      var divofdd=slipdd.getElementsByTagName("div");
+      var prearrow=document.getElementById("prearrow");
+      var nextarrow=document.getElementById("nextarrow");
+      var index=1;
+      var timer;
+      function pointSlip(){
+      	aofdt[index-1].className="selected";
+      }
+      function cancleSlip(a){
+      	aofdt[a-1].className="word-link";
+      }
+      function cancleSliptwo(b){
+      	aofdt[b].className="word-link";
+      }
+      function pageSlip(){
+      	divofdd[index-1].style.display="block";
+      }
+      function canclepageSlip(c){
+      	divofdd[c-1].style.display="none";
+      }
+      function canclepageSliptwo(d){
+      	divofdd[d].style.display="none";
+      }
+      nextarrow.onclick=function(){
+      	  if(index==divofdd.length){
+            	index=1;
+            	canclepageSlip(divofdd.length);
+            	pageSlip();
+            	cancleSlip(aofdt.length);
+           }
+           else{
+           index=index+1;
+           pageSlip();
+           for(var p=1;p<index;p++)
+              canclepageSlip(p);
+            }
+            pointSlip();
+            for(var i=1;i<index;i++)
+            cancleSlip(i);
+       }
+      prearrow.onclick=function(){
+      	 if(index==1){
+            	index=divofdd.length;
+            	canclepageSlip(1);
+            	pageSlip();
+            	cancleSlip(1);
+           }
+           else{
+           index=index-1;
+           pageSlip();
+           for(var p=divofdd.length;p>index;p--)
+              canclepageSlip(p);
+            }
+               
+            pointSlip();
+            for(var i=aofdt.length;i>index;i--)
+            cancleSlip(i);
+        }
+        for(var i=0;i<aofdt.length;i++){
+            aofdt[i].index = i;
+            aofdt[i].onmouseover=function(){
+                divofdd[this.index].style.display="block";
+                for(var q=0;q<this.index;q++)
+      	        canclepageSliptwo(q);
+                for(q=this.index+1;q<divofdd.length;q++)
+      	        canclepageSliptwo(q);
+                aofdt[this.index].className="selected";
+                for(q=0;q<this.index;q++)
+      	        cancleSliptwo(q);
+                for(q=this.index+1;q<aofdt.length;q++)
+      	        cancleSliptwo(q);
+      	        index=this.index+1;
+     }
+}
+        function autoPlay(){
+        	timer=setInterval(function(){
+                 nextarrow.onclick();
+        	},2000);
+        }
+              function autoStop(){
+              	clearInterval(timer);
+              }
+
+        container.onmouseover=autoStop;
+        container.onmouseout=autoPlay;
+
+          autoPlay();
+    }
+	</script>
+	<style type="text/css">
+	*{padding:0;margin:0;}
+	body{
+		text-align: center;
+		display: block;
+	}
+	#marvel-topnav-wrapper{
+		background-color:black;
+		min-width:906px;
+		height:82px;
+		width:100%;
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#marvel-topnav-wrapper>a{
+		width: 260px;
+		height:82px;
+		position:absolute;
+		left:180px;
+	}
+	.marvel-topnav{
+		list-style-type: none;
+		width: 600px;
+		height:20px;
+		position:absolute;
+		right:320px;
+		background-color: transparent;
+		word-spacing:10px;
+		margin:31px 0;
+	}
+	.marvel-topnav>li{
+		display: inline;
+	}
+	.marvel-topnav li>a:link {color:white;}   
+	.marvel-topnav li>a:visited {color:#F5F5DC;}
+	.marvel-topnav li>a:hover {color:white;} 
+	.marvel-topnav li>a:active {color:#D3D3D3;}
+	.marvel-topnav li>a{
+		text-decoration: none;
+		font:bold 14px Tahoma, Geneva, sans-serif;
+	}
+	.search-icon{
+		margin:27px 30px;
+		position: absolute;
+		right:250px;
+	}
+	.login-icon{
+		margin:25px 30px;
+		position: absolute;
+		right:180px;
+	}
+	#slip-wrapper{ 
+		width:100%; 
+		height:580px;
+		background-image: url(image/20141104231628.png);
+		background-repeat: repeat;
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#slip-container{
+		width:841px;
+		height:548px;
+		margin:0 auto;
+		position:relative;
+		border:10px solid white;
+		
+    }
+    #slip-container dl{ 
+	width:841px; 
+	height:548px; 
+	position:relative;
+    }
+    #slip-container dd { 
+	height:512px;
+	width:841px;
+	position: absolute;
+    }
+   .indexa{
+      position:relative;
+    }
+   .img-link{
+	width:590px;
+	height:512px;
+	float: left;
+    }
+    .page-bg{
+    float:right;
+	width:251px;
+	height:512px;
+	background-color:white;
+	display: inline;
+	text-align: right;
+	line-height: 0;
+    }
+    #slip-container dt { 
+	position:absolute; 
+	right:0px; 
+	bottom:0px;
+	width:841px;
+	height:36px; 
+	background:black; 
+	text-align:center; 
+    }
+    .word-link:hover {
+	background:transparent;
+	color:pink;
+    }
+    .page-bg span{
+	width:200px;
+	font:500 50px Impact,Charcoal,sans-serif;
+	color:black;
+    }
+    .page-bg a{
+	text-decoration: none;
+	color: red;
+}
+.selected{
+	font:900 25px 'Comic Sans MS', cursive, sans-serif;
+	background-color: red;
+	color: white;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-align:center; 
+	text-decoration:none; 
+	filter:alpha(opacity=20); 
+	opacity:.2;
+}
+.word-link{
+	font:900 25px 'Comic Sans MS', cursive, sans-serif;
+	color:white;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-align:center; 
+	text-decoration:none; 
+	filter:alpha(opacity=20); 
+	opacity:.2;
+    }
+    .arrow{
+    	display: none;
+    	line-height: 113px;
+    	position: absolute;
+    	top:200px;
+    	cursor: pointer;
+    }
+    #slip-container:hover .arrow{
+    	display: block;
+    }
+    #prearrow{
+    	left:0;
+    }
+    #nextarrow{
+    	right:251px;
+    }
+    #new-comics{
+	width:100%;
+	height:500px;
+	margin-left: auto;
+	margin-right: auto;
+	position:relative;
+	background-image: url(image/20141104232225.png);
+	background-repeat: repeat;
+    }
+    .small-bg{
+	background-color: black;
+	height:30px;
+	width:200px;
+	position:absolute;
+	top:80px;
+    }
+    .new-comics-nav{
+	width:500px;
+	height: 80px;
+	position: absolute;
+	top:80px;
+	left:200px;
+    }
+    .new-comics-nav span{
+	width:500px;
+	height: 40px;
+	font:900 30px 'Comic Sans MS',cursive,sans-serif;
+	color:black;
+    }
+    .new-comics-nav a{
+	color:black;
+	text-decoration:none;
+	font:900 20px Verdana,Genera,sans-serif;
+	margin-left:100px;
+    }
+    .comics-img{
+	width:147px;
+	height:225px;
+	border:solid 1px black;
+	text-align: center;
+	font-weight:bold;
+    }
+    #comics-one{
+	position:absolute;
+	left:11%;
+	bottom:20px;
+    }
+    #comics-two{
+	position:absolute;
+	left:33%;
+	bottom:20px;
+    }
+    #comics-three{
+	position:absolute;
+	left:55%;
+	bottom:20px;
+    }
+    #comics-four{
+	position:absolute;
+	left:77%;
+	bottom:20px;
+    }
+    #comics-wrapper{
+	width:100%;
+	height:600px;
+	background-image: url(image/544549f526c88.jpg);
+	position:relative;
+	margin-left: auto;
+	margin-right: auto;
+    }
+    .comics-word{
+	width:341px;
+	height:115px;
+	background-image: url(image/axis.png);
+	position:absolute;
+	top:200px;
+	right:150px;
+    }
+    #new-movies{
+	width:100%;
+	height:1600px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url(image/20141104231628.png);
+	background-repeat: repeat;
+	position:relative;
+    }
+    .small-bgone{
+	background-color:white;
+	height:30px;
+	width:200px;
+	position:absolute;
+	top:80px;
+    }
+    .new-movies-nav{
+	width:500px;
+	height: 80px;
+	position:absolute;
+	left:200px;
+	top: 80px;
+    }
+    .new-movies-nav span{
+	width:500px;
+	height: 40px;
+	font:900 30px 'Comic Sans MS',cursive,sans-serif;
+	color:white;
+    }
+    .new-movies-nav a{
+	color:white;
+	text-decoration:none;
+	margin-left:100px;
+	font:900 20px Verdana,Genera,sans-serif;
+    }
+    .movies-img{
+	width:390px;
+	height:610px;
+	text-align:center;
+	font-weight: bold;
+	color: white;
+}
+#movies-one{
+	position:absolute;
+	left:12%;
+	bottom:800px;
+}
+#movies-two{
+	position:absolute;
+	right:12%;
+	bottom:800px;
+}
+#movies-three{
+	position:absolute;
+	left:12%;
+	bottom: 80px;
+}
+#movies-four{
+	position:absolute;
+	right:12%;
+	bottom: 80px;
+}
+#movies-wrapper{
+	width:100%;
+	height:600px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url(image/540e1a2e16aab.jpg);
+	position:relative;
+}
+.movies-word{
+	width: 399px;
+	height: 78px;
+	background-image: url(image/catws.png);
+	position: absolute;
+	top:200px;
+	right:150px;
+}
+.small-bgtwo{
+	background-color:black;
+	height:30px;
+	width:200px;
+	position:absolute;
+	top:80px;
+}
+.new-tv-nav{
+	width:500px;
+	height: 80px;
+	position:absolute;
+	left:100px;
+	top: 80px;
+}
+.new-tv-nav span{
+	width:500px;
+	height: 40px;
+	font:900 30px 'Comic Sans MS',cursive,sans-serif;
+	color:black;
+}
+#tv-wrapper{
+	width:100%;
+	height:600px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url(image/540f6be8c10f4.jpg);
+	position:relative;
+}
+.tv-word{
+	width: 500px;
+	height: 148px;
+	background-image: url(image/shield.png);
+	position: absolute;
+	top:150px;
+	right:100px;
+	overflow: visible;
+}
+#marvel-footer-wrapper{
+	height:300px;
+	width:100%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:black;
+	position: relative;
+}
+.marvel-footer{
+	height:140px;
+	width:150px;
+	margin:50px; 
+	background-color: transparent;
+}
+.marvel-footer a:link {color:white;}   
+.marvel-footer a:visited {color:#F5F5DC;}
+.marvel-footer a:hover {color:white;} 
+.marvel-footer a:active {color:#D3D3D3;}
+.marvel-footer a{
+	text-decoration: none;
+	font:bold 14px 'Comic Sans MS',cursive,sans-serif;
+}
+#first-line{
+	position: absolute;
+	left:60px;
+}
+#second-line{
+	position: absolute;
+	left:310px;
+}
+#third-line{
+	position: absolute;
+	left:560px;
+}
+#forth-line{
+	position: absolute;
+	left:810px;
+}
+#fifth-line{
+	position: absolute;
+	left:1060px;
+}
+.marvel-footer span{
+	color:white;
+	text-align: center;
+	font:900 20px 'Comic Sans MS',cursive,sans-serif;
+}
+.marvel-footer ul{
+	list-style-type: none;
+}
+.marvel-footer li{
+	font:600 10px 'Comic Sans MS',cursive,sans-serif;
+	color:white;
+}
+.follow h4{
+	height:30px;
+	background-color:transparent;
+	padding: 20px;
+	color: white;
+	font:900 20px 'Comic Sans MS',cursive,sans-serif;
+}
+#icon-facebook:before{
+	content: url(image/20141105204004.jpg);
+}
+#icon-google:before{
+	content: url(image/20141105204025.jpg);
+}
+#icon-twitter:before{
+	content: url(image/20141105204044.jpg);
+}
+#icon-tumblr:before{
+	content: url(image/20141105204102.jpg);
+}
+#icon-youtube:before{
+	content: url(image/20141105204136.jpg);
+}
+.follow{
+	width:400px;
+	height:150px;
+	position: absolute;
+	top:150px;
+	background-color:transparent;
+}
+.follow span{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.bottom-footer{
+	list-style-type: none;
+	position: absolute;
+	bottom:5px;
+	left:150px;
+}
+.bottom-footer li{
+	display: inline;
+}
+.bottom-footer li>a{
+	text-decoration: none;
+	color:white;
+	font:900 12px 'Comic Sans MS',cursive,sans-serif;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+#search-box{
+	width:100%;
+	height:80px;
+	padding:20px 0;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:#2D2D2D;
+	position: relative;
+}
+#search-bg{
+	position:absolute;
+	left:200px;
+	height:80px;
+	width: 60%;
+	background-color: #1B1B1B;
+	-webkit-transform: skew(-11deg,0);
+	-ms-transform: skew(-11deg,0);
+	transform: skew(-11deg,0);
+}
+#inner-search-bg{
+	position:absolute;
+	left:200px;
+	width:80%;
+	height: 80px;
+	text-align:left;
+	background-color:transparent;
+}
+#search-box input.txtSearch {
+	float: left;
+	width:65%;
+	margin-left: 30px;
+	height:80px;
+	border: none;
+	outline: 0;
+	background-color: transparent;
+	color: #FFF;
+	font:40px Impact,Charcoal,sans-serif;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+#search-box button.btn-search {
+	width:10%;
+	font-size: 14px;
+	height: 40px;
+	float: right;
+	border: 0;
+	background-color:#B22222;
+	margin-top: 20px;
+	margin-right:150px;
+	display: inline-block;
+	outline: 0;
+	-webkit-transform: skew(-11deg,0);
+	-ms-transform: skew(-11deg,0);
+	transform: skew(-11deg,0);
+}
+#search-box button.btn-search:hover{
+	background-color: #800000;
+}
+.btn-search span{
+	color:white;
+	font:17px Impact,Charcoal,sans-serif;
+}
+   </style>
+  </head>
+  <body>
+	<div id="marvel-topnav-wrapper">
+		<a href="#"><img src="image/20141113163934.png"/></a>
+		<ul class="marvel-topnav">
+			<li><a href="http://marvel.com/comics" target="_blank">COMICS</a></li>
+			<li><a href="http://marvel.com/movies" target="_blank">MOVIES</a></li>
+			<li><a href="http://marvel.com/videos" target="_blank">VIDEOS</a></li>
+			<li><a href="http://marvel.com/games" target="_blank">GAMES</a></li>
+			<li><a href="http://marvel.com/tv" target="_blank">TV</a></li>
+			<li><a href="http://marvel.com/characters" target="_blank">CHARACTERS</a></li>
+			<li><a href="http://shop.marvel.com/" target="_blank">SHOP</a></li>
+			<li><a class="hide" href="#">MORE</a></li>
+		</ul>
+		<img class="search-icon" src="image/20141113164804.png"/>
+		<img class="login-icon" src="image/20141113164823.png"/>
+	</div>
+	<div id="search-box">
+		<div id="search-bg"></div>
+		<div id="inner-search-bg">
+			<input type="text" name="q" class="txtSearch" id="txtSearch" tabindex="1" placeholder="SEARCH"/>
+			<button class="btn-search" tabindex="2" type="submit">
+				<span>SEARCH</span>
+			</button>
+		</div>
+	</div>
+	<div id="slip-wrapper">
+		<div id="slip-container">
+			<dl>
+				<dt id="slip-dt">
+					<a name="1" class="word-link selected" href="http://marvel.com/videos/watch/3680/marvel_75th_anniversary_stan_lee_interview">1</a>
+					<a name="2" class="word-link" href="http://marvel.com/characters/54/spider-man">2</a>
+					<a name="3" class="word-link" href="http://marvel.com/movies/movie/181/captain_america_the_winter_soldier">3</a>
+					<a name="4" class="word-link" href="http://marvel.com/tv/show/190/marvels_agents_of_shield.">4</a>
+					<a name="5" class="word-link" href="http://marvel.com/videos/watch/4536/marvel_contest_of_champions_trailer">5</a>
+				</dt>
+				<dd id="slip-dd">
+					    <div class="indexa" id="indexa1" name="indexa1" style="display:block;">
+						<a class="img-link" href="#"><img src="image/20141104220731.jpg" /></a>
+						<p class="page-bg">
+							<span>FOCUS</span><br/>
+							<span>ON</span><br/>
+							<span>MARVEL'S</span><br/>
+							<span>75 YEARS</span><br/>
+							<span>A NEW TIME</span></br>
+							<span>BEGAN...</span><br/><br/>
+							<span><a href="#">More>></a></span>
+						</p>
+					</div>
+					<div class="indexa" id="indexa2" name="indexa2" style="display:none;">
+						<a class="img-link" href="#"><img src="image/20141104220802.png" /></a>
+						<p class="page-bg">
+							<span>NEW</span><br/>
+							<span>COMICS</span><br/>
+							<span>ARE COMING SOON</span><br/>
+							<span>READ</span><br/>
+							<span>SPIDER-MAN</span></br>
+							<span>NOW...</span><br/><br/>
+							<span><a href="#">More>></a></span>
+						</p>
+					</div>
+					<div class="indexa" id="indexa3" name="indexa3" style="display:none;">
+						<a class="img-link" href="#"><img src="image/20141104220826.png" /></a>
+						<p class="page-bg">
+							<span>MARVEL'S</span><br/>
+							<span>CAPTAIN AMERICA:</span><br/>
+							<span>THE</span><br/>
+							<span>WINTER SOLDIER</span><br/>
+							<span>WATCH NOW</span></br><br/>
+							<span><a href="#">More>></a></span>
+						</p>
+					</div>
+					<div class="indexa" id="indexa4" name="indexa4" style="display:none;">
+						<a class="img-link" href="#"><img src="image/20141104220845.png" /></a>
+						<p class="page-bg">
+							<span>MARVEL'S</span><br/>
+							<span>AGENTS</span><br/>
+							<span>OF SHIELD</span><br/>
+							<span>ON ABC</span><br/>
+							<span>HYRAvs</span></br>
+							<span>SHIELD</span></br>
+							<span>BEGIN...</span><br/><br/>
+							<span><a href="#">More>></a></span>
+						</p>
+					</div>
+					<div class="indexa" id="indexa5" name="indexa5" style="display:none;">
+						<a class="img-link" href="#"><img src="image/20141104220914.jpg" /></a>
+						<p class="page-bg">
+							<span>MARVEL'S</span><br/>
+							<span>CONTEST</span><br/>
+							<span>CHAMPIONS</span><br/>
+							<span>CLIP TO</span><br/>
+							<span>GET MORE</span></br>
+							<span>DETILS...</span><br/><br/>
+							<span><a href="#">More>></a></span>
+						</p>
+					</div>
+				</dd>
+			</dl>
+			<a id="nextarrow" class="arrow"><img src="image/20141215190648.png"/></a>
+			<a id="prearrow" class="arrow"><img src="image/20141215190648left.png"/></a>
+		</div>
+	</div>
+	<div id="new-comics">
+		<div class="small-bg"></div>
+		<div class="new-comics-nav">
+			<span>NEW COMICS</span>
+			<a href="http://manhua.dmzj.com/tags/marvel.shtml">More!Clip</a>
+		</div>
+		<div id="comics-one" class="comics-img">
+			<a href="http://manhua.dmzj.com/zhongjizhizhuxia/"><img src="image/20141101154401.png"/></a>
+			Spider-Man
+		</div>
+		<div id="comics-two" class="comics-img">
+			<a href="http://manhua.dmzj.com/fuchouzhev5/"><img src="image/20141101154451.png"/></a>
+			AvengersV5
+		</div>
+		<div id="comics-three" class="comics-img">
+			<a href="http://manhua.dmzj.com/aochuangjiyuan/"><img src="image/20141101154514.png"/></a>
+			Utron
+		</div>
+		<div id="comics-four" class="comics-img">
+			<a href="http://manhua.dmzj.com/fuchouzhevsxzhanjing/"><img src="image/20141101154540.jpg"/></a>
+			AvgVsX-Man
+		</div>
+	</div>
+	<div id="comics-wrapper">
+		<a href="https://comicstore.marvel.com/Avengers-X-Men-Axis-3-of-9/digital-comic/34979">
+			<div class="comics-word"></div></a>
+		</div>
+		<div id="new-movies">
+			<div class="small-bgone"></div>
+			<div class="new-movies-nav">
+				<span>NEW MOVIES</span>
+				<a href="http://baike.baidu.com/link?url=Kh_7xfqPAkQD9v5rX3agrPcsJ6EAmEdYJgNI_xZlynvMJgsq7q59P8UQyTAUfLV8n8uaWDNshzh6m7675jJWpK#7_1"> More!Clip   </a>
+			</div>
+			<div id="movies-one" class="movies-img">
+				<a href=http://movie.douban.com/subject/1866479/><img src="image/20141101164038.jpg"/></a>
+				Avengers
+			</div>
+			<div id="movies-two" class="movies-img">
+				<a href="http://movie.douban.com/subject/3231742/"><img src="image/20141101164138.jpg"/></a>
+				Iron ManIII
+			</div>
+			<div id="movies-three" class="movies-img">
+				<a href="http://movie.douban.com/subject/7065154/"><img src="image/20141101164222.png"/></a>
+				Guardians Of The Galaxy
+			</div>
+			<div id="movies-four" class="movies-img">
+				<a href="http://movie.douban.com/subject/6560058/"><img src="image/20141101164318.jpg"/></a>
+				ThorII
+			</div>
+		</div>
+		<div id="movies-wrapper">
+			<a href="http://marvel.com/movies/movie/181/captain_america_the_winter_soldier#relatedProducts">
+				<div class="movies-word"></div></a>
+			</div>
+			<div id="tv-wrapper">
+				<div class="small-bgtwo"></div>
+				<div class="new-tv-nav">
+					<span>MARVEL TV</span>
+				</div>
+				<a href="http://marvel.com/tv/show/190/marvels_agents_of_shield."><div class="tv-word"></div></a>
+			</div>
+			<div id="marvel-footer-wrapper">
+				<div id="first-line" class="marvel-footer">
+					<span>Comics</span>
+					<ul>
+						<li><a href="http://marvel.com/comics/calendar/?&offset=0&totalcount=14">Release Calendar</a></li>
+						<li><a href="http://marvel.com/comics/unlimited/">Marvel Unlimited</a></li>
+						<li><a href="https://comicstore.marvel.com/">Shop Digital Comics</a></li>
+					</ul>
+				</div>
+				<div id="second-line" class="marvel-footer">
+					<span>Characters</span>
+					<ul>
+						<li><a href="http://marvel.com/characters/54/spider-man">Spider-Man</a></li>
+						<li><a href="http://marvel.com/characters/68/avengers">Avengers</a></li>
+						<li><a href="http://marvel.com/characters/29/iron_man">Iron Man</a></li>
+						<li><a href="http://marvel.com/characters/25/hulk">Hulk</a></li>
+					</ul>
+				</div>
+				<div id="third-line" class="marvel-footer">
+					<span>Downloads</span>
+					<ul>
+						<li><a href="http://marvel.com/mobile/">Mobile Apps</a></li>
+						<li><a href="http://marvel.com/mobile/#games">Mobile Games</a></li>
+						<li><a href="http://marvel.com/podcasts/">Podcast</a></li>
+						<li><a href="http://marvel.com/wallpaper/">Wallpaper</a></li>
+					</ul>
+				</div>
+				<div id="forth-line" class="marvel-footer">
+					<span>Kids</span>
+					<ul>
+						<li><a href="http://www.marvelkids.com/">Marvel Kids</a></li>
+						<li><a href="http://www.marvelkids.com/">Kids Videos</a></li>
+						<li><a href="http://www.marvelkids.com/">Kids Games</a></li>
+						<li><a href="http://www.marvelkids.com/">Kids Activities</a></li>
+					</ul>
+				</div>
+				<div id="fifth-line" class="marvel-footer">
+					<span>Marvel</span>
+					<ul>
+						<li><a href="http://marvel.com/help/">Helps/FAQs</a></li>
+						<li><a href="https://marvel.com/preferences/email/unsubscribe">Email Preferences</a></li>
+						<li><a href="http://marvel.com/corporate/about/">About Marvel</a></li>
+						<li><a href="http://marvel.com/corporate/advertising/">Advertising</a></li>
+					</ul>
+				</div>
+				<div class="follow">
+					<h4>FOLLOW MARVEL</h4>
+					<a href="http://www.facebook.com/Marvel"><span id="icon-facebook" class="icon-img"></span></a>
+					<a href="https://plus.google.com/+marvel/posts"><span id="icon-google" class="icon-img"></span></a>
+					<a href="https://twitter.com/#!/marvel"><span id="icon-twitter" class="icon-img"></span></a>
+					<a href="http://marvelentertainment.tumblr.com/"><span id="icon-tumblr" class="icon-img"></span></a>
+					<a href="http://www.youtube.com/marvel"><span id="icon-youtube" class="icon-img"></span></a>
+				</div>
+				<ul class="bottom-footer">
+					<li><a href="http://disneytermsofuse.com/">Terms of Use</a></li>
+					<li><a href="https://disneyprivacycenter.com/">Privacy Policy</a></li>
+					<li><a href="https://disneyprivacycenter.com/notice-to-california-residents/">
+						Your California Privacy Rights</a></li>
+						<li><a href="https://disneyprivacycenter.com/kids-privacy-policy/english/">Children’s Online Privacy Policy</a></li>
+						<li><a href="http://marvel.com/corporate/license_tou">License Agreement</a></li>
+						<li><a href="http://preferences-mgr.truste.com/?type=marvel&affiliateId=115">Interest-Based Ads</a></li>
+						<li><a href="http://disneytermsofuse.com/">© 2014 Marvel</a></li>
+					</ul>
+				</div>
+	</body>
+</html>
